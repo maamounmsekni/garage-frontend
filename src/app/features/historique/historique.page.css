@@ -1,0 +1,171 @@
+/* FULL-BLEED: break out of any parent max-width container */
+:host {
+  display: block;
+  width: 100%;
+}
+
+/* the wrapper you added in HTML */
+.page {
+  width: 100vw;                      /* full viewport width */
+  margin-left: calc(50% - 50vw);     /* escape centered container */
+  padding: 18px 22px;
+  background: #fafafa;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Titles */
+h2 { margin: 0 0 14px; font-size: 24px; font-weight: 800; }
+h3 { margin: 0 0 12px; font-size: 16px; font-weight: 800; }
+
+/* Cards */
+.card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ececec;
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  box-sizing: border-box;
+}
+
+/* Top row */
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.row input { flex: 1; min-width: 360px; }
+
+/* Inputs */
+input {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  outline: none;
+  background: #fff;
+  transition: border-color .15s ease, box-shadow .15s ease;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+input:focus { border-color: #9cc3ff; box-shadow: 0 0 0 4px rgba(156,195,255,.35); }
+input[disabled] { background: #f3f3f3; color: #777; cursor: not-allowed; }
+
+/* Form grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 12px;
+}
+@media (max-width: 1000px) {
+  .row input { min-width: 100%; }
+  .grid { grid-template-columns: 1fr; }
+}
+
+/* Buttons */
+button {
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform .06s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
+  user-select: none;
+  font-weight: 600;
+}
+button:hover { border-color: #cfcfcf; box-shadow: 0 10px 25px rgba(0,0,0,0.08); }
+button:active { transform: translateY(1px); }
+
+button.primary {
+  border-color: #bcd6ff;
+  background: linear-gradient(180deg, #f3f8ff, #e7f1ff);
+}
+button.danger {
+  border-color: #ffc2c2;
+  background: linear-gradient(180deg, #fff6f6, #ffecec);
+}
+
+/* Messages */
+.muted { color: #666; margin-top: 8px; }
+.error { color: #b00020; margin-top: 8px; }
+
+/* TABLE WRAP */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 16px;
+  border: 1px solid #eee;
+  background: #fff;
+}
+
+/* TABLE: wider + fixed layout so columns distribute better */
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;     /* ✅ important for consistent widths */
+  min-width: 1400px;       /* ✅ makes it “wider” (scroll on smaller screens) */
+}
+
+/* Header */
+.table thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: #f7f7f9;
+  border-bottom: 1px solid #eee;
+}
+
+/* Cells */
+.table th, .table td {
+  padding: 16px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid #f0f0f0;
+  box-sizing: border-box;
+}
+
+/* Header typography */
+.table th {
+  font-size: 12px;
+  color: #6b7280;
+  letter-spacing: .3px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+/* Hover */
+.table tbody tr:hover td { background: #fbfdff; }
+
+/* ✅ Repair shows FULL text (wrap lines, no cut) */
+td.repair {
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.table .actions button,
+.table td button {
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 13px;
+}
+
+/* Mono */
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+  font-size: 13px;
+}

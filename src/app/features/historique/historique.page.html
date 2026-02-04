@@ -1,0 +1,110 @@
+<div class="page">
+  <h2>Aymen Auto</h2>
+
+  <div class="card">
+    <div class="row">
+      <input
+        [(ngModel)]="numeroSerieSearch"
+        placeholder="Rechercher par numéro de série"
+        (keyup.enter)="search()"
+      />
+      <button class="primary" (click)="search()">Rechercher</button>
+
+      <button (click)="toggleForm()">
+        {{ showForm ? 'Fermer' : 'Ajouter' }}
+      </button>
+
+      <button (click)="loadAll()">Tout afficher</button>
+    </div>
+
+    <div class="muted" *ngIf="loading">Chargement...</div>
+    <div class="error" *ngIf="error">{{ error }}</div>
+  </div>
+
+  <!-- Form -->
+  <div class="card" *ngIf="showForm">
+    <h3>
+      {{ editing ? 'Modifier' : (addingVisit ? 'Ajouter une nouvelle visite' : 'Ajouter') }}
+    </h3>
+
+    <div class="grid">
+      <input [(ngModel)]="form.numero_serie" placeholder="Numéro de série" [disabled]="editing || addingVisit" />
+
+      <ng-container *ngIf="!addingVisit">
+        <input [(ngModel)]="form.marque" placeholder="Marque voiture" />
+        <input [(ngModel)]="form.nom_proprietaire" placeholder="Nom du propriétaire" />
+        <input [(ngModel)]="form.telephone" placeholder="Téléphone" />
+      </ng-container>
+
+      <input type="date" [(ngModel)]="form.date_visite" />
+      <input [(ngModel)]="form.reparation" placeholder="Réparation" />
+    </div>
+
+    <div class="row">
+      <button class="primary" (click)="submit()">
+        {{ editing ? 'Sauvegarder' : (addingVisit ? 'Ajouter' : 'Enregistrer') }}
+      </button>
+
+      <button (click)="cancelForm()">Annuler</button>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <div class="card">
+    <h3>Résultats</h3>
+
+    <p class="muted" *ngIf="rows.length === 0 && !loading">Aucun résultat.</p>
+
+    <div class="table-wrap" *ngIf="rows.length > 0">
+      <table class="table">
+        <!-- ✅ controls widths correctly -->
+        <colgroup>
+          <col style="width: 150px" />
+          <col style="width: 170px" />
+          <col style="width: 190px" />
+          <col style="width: 160px" />
+          <col style="width: 120px" />
+          <col /> <!-- Réparation takes remaining space -->
+          <col style="width: 110px" />
+          <col style="width: 160px" />
+        </colgroup>
+
+        <thead>
+          <tr>
+            <th>Numéro de série</th>
+            <th>Marque</th>
+            <th>Propriétaire</th>
+            <th>Téléphone</th>
+            <th>Date</th>
+            <th>Réparation</th>
+            <th>Ajouter</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let r of rows">
+            <td class="mono">{{ r.numero_serie }}</td>
+            <td>{{ r.marque }}</td>
+            <td>{{ r.nom_proprietaire }}</td>
+            <td>{{ r.telephone }}</td>
+            <td class="nowrap">{{ r.date_visite | date:'dd/MM/yyyy' }}</td>
+
+            <!-- ✅ wrap text nicely -->
+            <td class="repair">{{ r.reparation }}</td>
+
+            <td>
+              <button class="primary" (click)="startVisit(r)">Ajouter</button>
+            </td>
+
+            <td class="actions">
+              <button (click)="startEdit(r)">Edit</button>
+              <button class="danger" (click)="deleteRow(r)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
