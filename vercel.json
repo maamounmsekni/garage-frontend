@@ -1,4 +1,10 @@
 {
+  "builds": [
+    {
+      "src": "dist/garage-frontend",
+      "use": "@vercel/static"
+    }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/index.html" }
   ]
