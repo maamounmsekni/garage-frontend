@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "dist/garage-frontend",
+      "src": "dist/garage-frontend/**/*",
       "use": "@vercel/static"
     }
   ],
