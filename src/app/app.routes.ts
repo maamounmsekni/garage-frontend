@@ -6,7 +6,7 @@ import { VoitureDetailsComponent } from './features/voiture-details/voiture-deta
 
 export const routes: Routes = [
   { path: '', redirectTo: 'historique', pathMatch: 'full' },
-  { path: 'historique', component: HistoriquePage },
+  { path: '', component: HistoriquePage },
   { path: 'voitures', component: VoituresComponent },
   { path: 'voitures/:id', component: VoitureDetailsComponent },
   { path: '**', redirectTo: 'historique' }, // This ensures any unknown routes will redirect
